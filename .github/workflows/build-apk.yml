@@ -18,6 +18,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Install NDK and CMake
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018" "cmake;3.22.1"
+
       - name: Build release APKs
         run: |
           chmod +x gradlew

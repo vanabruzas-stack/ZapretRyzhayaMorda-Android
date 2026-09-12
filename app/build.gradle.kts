@@ -22,6 +22,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // пин NDK: без него android.ndkDirectory ищет версию по умолчанию
+        // и роняет КОНФИГУРАЦИЮ проекта, если её нет на машине/раннере
+        ndkVersion = "27.2.12479018"
+
         ndk {
             abiFilters.addAll(abis)
         }
@@ -99,12 +103,6 @@ dependencies {
 tasks.register<Exec>("runNdkBuild") {
     group = "build"
 
-    val ndkDir = android.ndkDirectory
-    executable = if (System.getProperty("os.name").startsWith("Windows", ignoreCase = true)) {
-        "$ndkDir\\ndk-build.cmd"
-    } else {
-        "$ndkDir/ndk-build"
-    }
     setArgs(listOf(
         "NDK_PROJECT_PATH=build/intermediates/ndkBuild",
         "NDK_LIBS_OUT=src/main/jniLibs",
@@ -112,7 +110,17 @@ tasks.register<Exec>("runNdkBuild") {
         "NDK_APPLICATION_MK=src/main/jni/Application.mk"
     ))
 
-    println("Command: $commandLine")
+    // ndkDirectory резолвим в момент ВЫПОЛНЕНИЯ задачи, а не конфигурации:
+    // иначе отсутствие NDK роняет весь gradle-билд ещё до старта задач
+    doFirst {
+        val ndkDir = android.ndkDirectory
+        executable = if (System.getProperty("os.name").startsWith("Windows", ignoreCase = true)) {
+            "$ndkDir\\ndk-build.cmd"
+        } else {
+            "$ndkDir/ndk-build"
+        }
+        println("Command: $commandLine")
+    }
 }
 
 tasks.preBuild {
