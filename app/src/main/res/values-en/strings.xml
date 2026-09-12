@@ -230,4 +230,18 @@
     <string name="file_picker_unavailable">The device has no system file picker. Grant the app file access to continue.</string>
     <string name="grant_access">Grant access</string>
     <string name="storage_access_not_granted">File access was not granted</string>
+    <string name="rm_panel_title">Provider presets — one tap</string>
+    <string name="rm_preset_rostelecom">Rostelecom</string>
+    <string name="rm_preset_t2">T2 / Tele2</string>
+    <string name="rm_preset_megafon">MegaFon</string>
+    <string name="rm_preset_yota">Yota</string>
+    <string name="rm_preset_universal">Universal</string>
+    <string name="rm_auto_pick">★ Auto pick</string>
+    <string name="rm_tg_help">Telegram: how-to</string>
+    <string name="rm_tg_instructions">1. Enable bypass: tap your provider preset (or «★ Auto pick» → «Start test» → «Apply» on the winner).
+2. In Telegram: Settings → Data and Storage → Proxy → turn OFF all proxies (especially old 127.0.0.1 ones added from PC — TG refuses to connect through them).
+3. No proxy needed: in VPN mode Telegram goes through the bypass itself. Wait 1–2 minutes after enabling.
+4. If TG still fails (ISP blocks by IP): switch app mode to Proxy in settings, then add a SOCKS5 proxy in Telegram: server 127.0.0.1, port 1080.</string>
+    <string name="rm_preset_applied">Preset %1 applied</string>
+    <string name="rm_open_telegram">Open Telegram</string>
 </resources>

@@ -2,4 +2,8 @@
 <resources>
     <color name="icon_color">#121213</color>
     <color name="green_active">#4CAF50</color>
+    <color name="rm_bg">#121213</color>
+    <color name="rm_surface">#1E1E20</color>
+    <color name="rm_orange">#EB732F</color>
+    <color name="rm_orange_dark">#C85F22</color>
 </resources>

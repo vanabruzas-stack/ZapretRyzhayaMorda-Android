@@ -201,10 +201,17 @@
 
     </LinearLayout>
 
+    <include
+        android:id="@+id/rm_panel"
+        layout="@layout/rm_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_buttons" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_buttons">
+        android:layout_above="@id/rm_panel">
 
         <LinearLayout
             android:id="@+id/center_container"

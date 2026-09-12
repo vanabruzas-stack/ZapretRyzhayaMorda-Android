@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.ByeDPI" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceContainer</item>
+    <!-- Запрет Рыжая морда: фирменная тёмная тема (mapper design).
+         БЕЗ DynamicColors — брендовый оранжевый не должен перекрашиваться
+         системной палитрой Material You -->
+    <style name="Theme.ByeDPI" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:navigationBarColor">@color/rm_bg</item>
+        <item name="android:statusBarColor">@color/rm_bg</item>
+        <item name="android:windowBackground">@color/rm_bg</item>
 
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
 
-        <item name="colorControlActivated">?attr/colorPrimary</item>
-        <item name="colorControlHighlight">?attr/colorSecondaryContainer</item>
+        <item name="colorPrimary">@color/rm_orange</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">@color/rm_orange_dark</item>
+        <item name="colorOnPrimaryContainer">#FFFFFF</item>
+        <item name="colorSecondary">@color/rm_orange</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSurface">@color/rm_surface</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorOnSurfaceVariant">#B3B3B3</item>
+        <item name="colorSurfaceContainer">@color/rm_surface</item>
+        <item name="colorSurfaceVariant">@color/rm_surface</item>
+
+        <item name="colorControlActivated">@color/rm_orange</item>
+        <item name="colorControlHighlight">#33EB732F</item>
 
         <item name="alertDialogTheme">@style/CustomAlertDialog</item>
 
@@ -20,8 +36,14 @@
         <item name="materialCardViewStyle">@style/SmallShadowCard</item>
     </style>
 
-    <style name="AppToolbar" parent="Widget.Material3.Toolbar.Surface">
-        <item name="android:background">?attr/colorSurfaceContainer</item>
+    <style name="AppToolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/rm_bg</item>
+        <item name="titleTextColor">#FFFFFF</item>
+    </style>
+
+    <style name="SmallShadowCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardElevation">1dp</item>
+        <item name="cardBackgroundColor">@color/rm_surface</item>
     </style>
 
     <style name="CircleButton" parent="Widget.Material3.Button.Icon">

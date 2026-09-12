@@ -43,6 +43,16 @@ class MainActivity : BaseActivity() {
         private val TAG: String = MainActivity::class.java.simpleName
         private const val BATTERY_OPTIMIZATION_REQUESTED = "battery_optimization_requested"
 
+        // RM-пресеты провайдеров: проверенные сообществом ByeByeDPI стратегии
+        // (Ростелеком-победитель — проверено 54/76 на живом iPhone, те же флаги валидны
+        // и для Android-ядра byedpi). Глобальные, без -H: лечат и Telegram,
+        // который ходит на IP дата-центров без домена.
+        private const val RM_PRESET_ROSTELECOM = "-d1 -s4 -d8 -s1+s -d5+s -s10+s -d20+s -a1"
+        private const val RM_PRESET_T2 = "-o1 -s1+s -s2+s -s5+s -r-5+se -t6 -a1"
+        private const val RM_PRESET_MEGAFON = "-d1 -o1 -s1+s -s2+s -s5+s -r-5+se -s2 -s5+hm -t6 -Qr"
+        private const val RM_PRESET_YOTA = "-m1 -s5+hs -r-5+se -r16+s -o1"
+        private const val RM_PRESET_UNIVERSAL = "-o1 -s1+s -s4+s -s5+s -s8+s -s10+s -s20+s -a1"
+
         private fun collectLogs(): String? {
             return try {
                 val process = Runtime.getRuntime().exec("logcat *:D -d")
@@ -223,6 +233,8 @@ class MainActivity : BaseActivity() {
         binding.strategyButton.setOnClickListener {
             showStrategyPicker()
         }
+
+        setupRmPanel()
 
         if (!PermissionUtils.hasNotificationPermission(this)) {
             PermissionUtils.requestNotificationPermission(this, 1)
@@ -498,6 +510,57 @@ class MainActivity : BaseActivity() {
 
             ServiceManager.restart(this, mode)
             Toast.makeText(this, R.string.service_restart, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // RM-панель: пресеты провайдеров одним нажатием, авто-подбор и TG-инструкция
+    private fun setupRmPanel() {
+        val presets = listOf(
+            Triple(binding.rmPanel.presetRostelecom, getString(R.string.rm_preset_rostelecom), RM_PRESET_ROSTELECOM),
+            Triple(binding.rmPanel.presetT2, getString(R.string.rm_preset_t2), RM_PRESET_T2),
+            Triple(binding.rmPanel.presetMegafon, getString(R.string.rm_preset_megafon), RM_PRESET_MEGAFON),
+            Triple(binding.rmPanel.presetYota, getString(R.string.rm_preset_yota), RM_PRESET_YOTA),
+            Triple(binding.rmPanel.presetUniversal, getString(R.string.rm_preset_universal), RM_PRESET_UNIVERSAL),
+        )
+
+        for ((button, name, cmd) in presets) {
+            button.setOnClickListener { applyRmPreset(name, cmd) }
+        }
+
+        binding.rmPanel.rmAutoButton.setOnClickListener {
+            startActivity(Intent(this, TestActivity::class.java))
+        }
+
+        binding.rmPanel.rmTgButton.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.rm_tg_help)
+                .setMessage(R.string.rm_tg_instructions)
+                .setPositiveButton(R.string.rm_open_telegram) { _, _ ->
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("tg://")))
+                    } catch (exception: Exception) {
+                        Log.w(TAG, "Telegram not installed", exception)
+                    }
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+        }
+    }
+
+    // одно нажатие: стратегия -> prefs -> (ре)старт обхода
+    private fun applyRmPreset(name: String, cmd: String) {
+        getPreferences().edit {
+            putBoolean("byedpi_enable_cmd_settings", true)
+            putString("byedpi_cmd_args", cmd)
+        }
+
+        updateStrategyButton()
+        Toast.makeText(this, getString(R.string.rm_preset_applied, name), Toast.LENGTH_SHORT).show()
+
+        if (appStatus.first == AppStatus.Running) {
+            ServiceManager.restart(this, getPreferences().mode())
+        } else {
+            start()
         }
     }
 

@@ -119,6 +119,12 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+            <include
+            android:id="@+id/rm_panel"
+            layout="@layout/rm_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <LinearLayout

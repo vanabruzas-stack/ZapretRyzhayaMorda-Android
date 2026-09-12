@@ -230,4 +230,18 @@
     <string name="file_picker_unavailable">На устройстве отсутствует системный выбор файлов. Для продолжения предоставьте приложению доступ к файлам.</string>
     <string name="grant_access">Предоставить доступ</string>
     <string name="storage_access_not_granted">Доступ к файлам не предоставлен</string>
+    <string name="rm_panel_title">Пресеты провайдеров — одним нажатием</string>
+    <string name="rm_preset_rostelecom">Ростелеком</string>
+    <string name="rm_preset_t2">T2 / Tele2</string>
+    <string name="rm_preset_megafon">Мегафон</string>
+    <string name="rm_preset_yota">Yota</string>
+    <string name="rm_preset_universal">Универсальный</string>
+    <string name="rm_auto_pick">★ Авто-подбор</string>
+    <string name="rm_tg_help">Telegram: инструкция</string>
+    <string name="rm_tg_instructions">1. Включи обход: нажми пресет своего провайдера (или «★ Авто-подбор» → «Начать тест» → у победителя «Применить»).
+2. В Telegram: Настройки → Данные и память → Прокси-сервер → ВЫКЛЮЧИ все прокси (особенно старые 127.0.0.1, добавленные с ПК — из-за них TG не подключается).
+3. Прокси добавлять НЕ нужно: в режиме VPN Telegram идёт через обход сам. После включения подожди 1–2 минуты — TG держит старые соединения, пока не отвалится таймаут.
+4. Если TG всё равно не подключается (провайдер душит его по IP): в настройках приложения переключи режим на Proxy, затем в Telegram добавь прокси SOCKS5: сервер 127.0.0.1, порт 1080 — это аналог «Турбо Telegram» с ПК.</string>
+    <string name="rm_preset_applied">Пресет «%1» включён</string>
+    <string name="rm_open_telegram">Открыть Telegram</string>
 </resources>

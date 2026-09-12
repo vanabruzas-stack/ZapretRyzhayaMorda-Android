@@ -1,25 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.ByeDPI" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#5976DF</item>
-        <item name="colorPrimaryVariant">#3C52A3</item>
+    <!-- Запрет Рыжая морда: фирменная тёмная тема (mapper design),
+         всегда тёмная, без дневного варианта -->
+    <style name="Theme.ByeDPI" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/rm_orange</item>
+        <item name="colorPrimaryVariant">@color/rm_orange_dark</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
-        <item name="colorSecondary">#5976DF</item>
-        <item name="colorSecondaryVariant">#3C52A3</item>
+        <item name="colorSecondary">@color/rm_orange</item>
+        <item name="colorSecondaryVariant">@color/rm_orange_dark</item>
         <item name="colorOnSecondary">#FFFFFF</item>
 
-        <item name="android:statusBarColor">#3C52A3</item>
+        <item name="android:statusBarColor">@color/rm_bg</item>
+        <item name="android:navigationBarColor">@color/rm_bg</item>
+        <item name="android:windowBackground">@color/rm_bg</item>
 
-        <item name="colorSurface">#F5F5F5</item>
-        <item name="colorOnSurface">#212121</item>
+        <item name="colorSurface">@color/rm_surface</item>
+        <item name="colorOnSurface">#FFFFFF</item>
 
         <item name="materialCardViewStyle">@style/SmallShadowCard</item>
     </style>
 
-    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar.Primary" />
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">@color/rm_bg</item>
+        <item name="titleTextColor">#FFFFFF</item>
+    </style>
 
     <style name="SmallShadowCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">1dp</item>
+        <item name="cardBackgroundColor">@color/rm_surface</item>
     </style>
 
     <style name="CircleButton" parent="Widget.MaterialComponents.Button">
@@ -30,11 +39,39 @@
     </style>
 
     <style name="CustomAlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-        <!-- -->
+        <item name="android:background">@color/rm_surface</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
     <style name="PillCard">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RmPresetButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/rm_surface</item>
+        <item name="strokeColor">@color/rm_orange</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <style name="RmActionButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/rm_orange</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="RmSecondaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/rm_surface</item>
+        <item name="strokeColor">@color/rm_orange</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="cornerRadius">12dp</item>
     </style>
 </resources>
