@@ -13,12 +13,12 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "io.github.romanvht.byedpi"
+        applicationId = "ru.muzzlegraphics.zrm"
         minSdk = 21
         //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1780
-        versionName = "1.7.8"
+        versionName = "1.7.8-rm1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -38,6 +38,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             buildConfigField("String", "VERSION_NAME",  "\"${defaultConfig.versionName}-debug\"")

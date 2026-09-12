@@ -1,0 +1,35 @@
+# Сборка APK «Запрет Рыжая морда» (форк ByeByeDPI)
+# Actions → build-apk → Artifacts → ZrmAndroid-APK (universal + per-ABI)
+name: build-apk
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive   # byedpi + hev-socks5-tunnel (+ их вложенные)
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build release APKs
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Collect APKs
+        run: |
+          mkdir -p out
+          find app/build/outputs/apk -name "*.apk" -exec cp {} out/ \;
+          ls -la out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ZrmAndroid-APK
+          path: out/*.apk
